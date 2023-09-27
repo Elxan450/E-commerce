@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>EShopper - Favorites</title>
+{% endblock %}
+
+{% block content %}
+    <!-- Cart Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 justify-content-center">
+            <div class="col-lg-5 table-responsive mb-5">
+                <table class="table table-bordered text-center mb-0">
+                    <thead class="bg-secondary text-dark">
+                        <tr>
+                            <th>Products</th>
+                            <th>Price</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        {% for product in products %}
+                            <tr>
+                                <td class="align-middle"><img src="{{url_for('static', filename = '')}}{{product.first_image()}}" alt="" style="width: 50px;">{{product.name}}</td>
+                                <td class="align-middle">${{product.discounted_price}}</td>
+                                <td class="align-middle">
+                                    <form action="{{url_for('delete_favorite', id = product.id)}}" method="post">
+                                        <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-times"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+{% endblock %}
